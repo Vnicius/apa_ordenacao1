@@ -66,7 +66,7 @@ class HeapSort(object):
 	def buildHeap(self, array):
 		n = len(array) - 1
 
-		for x in range(n//2,0,-1):
+		for x in range(n//2,-1,-1):
 			self.maxHeap(array,x,n)
 
 	def sort(self,array):
@@ -74,7 +74,7 @@ class HeapSort(object):
 
 		n = len(array) - 1
 
-		for x in range(n,0,-1):
+		for x in range(n,-1,-1):
 			self.swap(array,0,x)
 			n-=1
 			self.maxHeap(array,0,n)
@@ -139,13 +139,33 @@ class InsertionSort(object):
 
 ########################
 
+
 if __name__ == '__main__':
-	op = sys.argv[1]
-	vetor = sys.argv[2]
-	print(op)
-	if int(op) == 0:
+	op = int(sys.argv[1])
+	vetor = []
+	tam = input()
+	cont = 0
+
+	while cont <= tam-1:
+		x = input()
+		vetor.append(x)
+		cont+=1
+
+	if op == 1:
 		sort = SelectionSort()
 		sort.sort(vetor)
-		print(vetor)
+	elif op == 2:
+		sort = InsertionSort()
+		sort.sort(vetor)
+	elif op == 3:
+		sort = MergeSort()
+		sort.sort(vetor)
+	elif op == 4:
+		sort = QuickSort()
+		sort.sort(vetor)
+	elif op == 5:
+		sort = HeapSort()
+		sort.sort(vetor)	
 
-	print(vetor+"1")
+	for x in range(0,len(vetor)):
+		print(vetor[x])
