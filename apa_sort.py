@@ -83,46 +83,37 @@ class HeapSort(object):
 
 class MergeSort:
 	
-	def merge(self,array,ini,meio,fim):
-		b=[]
-		for x in array:
-			b = b+[x]
+	def sort(self,lista):
 
-		i = ini
-		j = meio + 1
-		k = ini
+		if len(lista) > 1:
+			meio = len(lista)/2
 
-		while i <= meio and j<= fim:
-			if b[i] <= b[j]:
-				array[k] = b[i]
+			listaEsq = lista[:meio]
+			listaDir = lista[meio:]
+
+			self.sort(listaEsq)
+			self.sort(listaDir)
+
+			i = j = k = 0
+
+			while i < len(listaEsq) and j < len(listaDir):
+				if listaEsq[i] < listaDir[j]:
+					lista[k] = listaEsq[i]
+					i += 1
+				else:
+					lista[k] = listaDir[j]
+					j+= 1
+				k += 1
+
+			while i < len(listaEsq):
+				lista[k] = listaEsq[i]
 				i+=1
-			else:
-				array[k] = b[j]
+				k+=1
+
+			while j < len(listaDir):
+				lista[k] = listaDir[j]
 				j+=1
-			k+=1
-
-		while i<=meio:
-			array[k] = b[i]
-			i+=1
-			k+=1
-
-		while j<=fim:
-			array[k] = b[j]
-			j+=1
-			k+=1
-
-	def mergeSort(self,array,ini,fim):
-		if ini < fim:
-			meio = ini + (fim - ini)//2
-
-			self.mergeSort(array,ini,meio)
-			self.mergeSort(array,meio+1,fim)
-
-			self.merge(array,ini,meio,fim)
-
-
-	def sort(self,array):
-		self.mergeSort(array,0,len(array)-1)
+				k+=1
 
 ###################
 
